@@ -103,12 +103,12 @@ input[type=submit]:hover {
 			<th>Relation</th>
 			<th>Address</th>
 		</tr> 
-		{% for info in ibrgy.info_set.all %}
+		{% for bresidents in ibrgy.bresidents_set.all %}
 		<tr>
 			<!{{ forloop.counter }}:  -->
-			<td>{{ forloop.counter }} : {{info.textFM }}</td>
-			<td>{{info.textRS}}</td>
-			<td>{{info.textAdd}}</td>
+			<td>{{ forloop.counter }} : {{bresidents.rname }}</td>
+			<td>{{bresidents.rrelation}}</td>
+			<td>{{bresidents.radd}}</td>
 			
 		
 		</tr> {% endfor %} </table>

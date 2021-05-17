@@ -34,13 +34,20 @@ class BSMSTest(LiveServerTestCase):
         self.assertIn('BARANGAY SAP MONITORING SYSTEM', self.browser.title)
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('BARANGAY SAP MONITORING SYSTEM', header_text)  
-      
+      	
         
+        inputmncplty = self.browser.find_element_by_id('Municipality')
         inputbrgy = self.browser.find_element_by_id('Brgy')
         inputbrgyID = self.browser.find_element_by_id('BrgyID')
+        self.assertEqual(inputmncplty.get_attribute('placeholder'),'Enter Municipality')
         self.assertEqual(inputbrgy.get_attribute('placeholder'),'Enter Barangay')
         self.assertEqual(inputbrgyID.get_attribute('placeholder'),'Enter Barangay ID')
         
+        time.sleep(1)
+        inputmncpltyy =  self.browser.find_element_by_id('Municipality')
+        inputmncplty.click()
+        inputmncplty.send_keys('Dasmariñas City')
+       
         time.sleep(1)
         inputbrgy =  self.browser.find_element_by_id('Brgy')
         inputbrgy.click()

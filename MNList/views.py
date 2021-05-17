@@ -1,6 +1,6 @@
 #from django.http import HttpResponse    
 from django.shortcuts import redirect, render
-from MNList.models import Info, IBrgy
+from MNList.models import BResidents, IBrgy, SBeneficiary, SDistributions, StatusDB
 
 def MainPage(request): 
      ibrgys = IBrgy.objects.all()
@@ -9,7 +9,7 @@ def MainPage(request):
   
 def add_info(request, ibrgy_id):    
    ibrgy_ = IBrgy.objects.get(id=ibrgy_id)    
-   Info.objects.create(textFM=request.POST['addFM'],textRS=request.POST['addRS'],textAdd=request.POST['addadd'], ibrgy=ibrgy_)
+   BResidents.objects.create(rname=request.POST['addFM'],rrelation=request.POST['addRS'],radd=request.POST['addadd'], ibrgy=ibrgy_)
    return redirect(f'/MNList/{ibrgy_.id}/')    
    
 def view_ibrgy(request, ibrgy_id):    
@@ -22,7 +22,7 @@ def new_ibrgy(request):
     #newCar = IBrgy.objects.create(bname=request.POST['Brgy'],bID=request.POST['BrgyID'],ibrgy=newCar)
     #return redirect(f'/MNList/{newCar_.id}/')
     
-    newibrgy_ = IBrgy.objects.create(bname=request.POST['Brgy'],bID=request.POST['BrgyID'])
+    newibrgy_ = IBrgy.objects.create(mncplty=request.POST['Municipality'],bname=request.POST['Brgy'],bID=request.POST['BrgyID'])
     return redirect(f'/MNList/{newibrgy_.id}/') 
   
    #ibrgy_ = IBrgy.objects.create()
@@ -44,10 +44,10 @@ def dtmanipulation(request):
     ibrgy = IBrgy.objects.all()
     result = 'Printing all entries in Carrier model: <br>'
     for x in objects:
-        res == x.Name+"<br>"
+        res == x.addFM+"<br>"
         
     #Read a specific data    
-    cname = IBrgy.objects.get(id="19")   
+    cname = IBrgy.objects.get(id="Brgy")   
     res += 'Printing One entry <br>'
     res += cname.Address
       
@@ -56,18 +56,18 @@ def dtmanipulation(request):
     cname.delete()
     
     ibrgy = IBrgy.objects.get(name = 'Sasuke Uchiha')
-    ibrgy.Number = "09954626390"
+    ibrgy.addadd = "B 7 L 7"
     ibrgy.save()
     res = ""
     
     #Filtering data:
-    qs = Info.objects.filter(name = "Sasuke Uchiha")
+    qs = BResidents.objects.filter(name = "Sasuke Uchiha")
     res += "Found: %s results<br>"%len(qs)
     
     #ordering results
     qs = IBrgy.objects.order_by("Address")
     for x in qs:
-        res += x.Name + x.Address +'<br>'
+        res += x.addFM + x.addadd +'<br>'
 '''      
 
 def MainPage(request): 
