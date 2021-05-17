@@ -100,7 +100,8 @@ input[type=submit]:hover {
 			<th>Barangay</th>
 			<th>Barangay Code</th>
 		</tr>
-		<tr> {% for ibrgy in ibrgy_ %}
+		<tr> {% for ibrgy in ibrgys %}
+		        
 			<td>{{ibrgy.bname}}</td>
 			<td>{{ibrgy.bID}}</td>
 		</tr> {% endfor %}

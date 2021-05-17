@@ -3,9 +3,10 @@ from django.shortcuts import redirect, render
 from MNList.models import Info, IBrgy
 
 def MainPage(request): 
-     infos = Info.objects.all()
-     return render(request, 'BSMS.html',{'infos' : infos})
-   
+     ibrgys = IBrgy.objects.all()
+     return render(request, 'BSMS.html',{'ibrgys' : ibrgys})
+     
+  
 def add_info(request, ibrgy_id):    
    ibrgy_ = IBrgy.objects.get(id=ibrgy_id)    
    Info.objects.create(textFM=request.POST['addFM'],textRS=request.POST['addRS'],textAdd=request.POST['addadd'], ibrgy=ibrgy_)
@@ -21,12 +22,12 @@ def new_ibrgy(request):
     #newCar = IBrgy.objects.create(bname=request.POST['Brgy'],bID=request.POST['BrgyID'],ibrgy=newCar)
     #return redirect(f'/MNList/{newCar_.id}/')
     
-    #newibrgy_ = IBrgy.objects.create(bname=request.POST['Brgy'],bID=request.POST['BrgyID'],ibrgy=newibrgy_)
-    #return redirect(f'/MNList/{newibrgy_.id}/') 
+    newibrgy_ = IBrgy.objects.create(bname=request.POST['Brgy'],bID=request.POST['BrgyID'])
+    return redirect(f'/MNList/{newibrgy_.id}/') 
   
-   ibrgy_ = IBrgy.objects.create()
-   Info.objects.create(ibrgy=ibrgy_)
-   return redirect(f'/MNList/{ibrgy_.id}/')
+   #ibrgy_ = IBrgy.objects.create()
+   #Info.objects.create(ibrgy=ibrgy_)
+   #return redirect(f'/MNList/{ibrgy_.id}/')
     
    #return redirect('/MNList/the-only-list-in-the-world/')
    #Info.objects.create(text=request.POST['itext'])
