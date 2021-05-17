@@ -1,0 +1,112 @@
+<html>
+
+<head>
+	<title>BARANGAY SAP MONITORING SYSTEM</title>
+</head>
+<style>
+body {
+	margin: 0;
+	min-width: 250px;
+	background-color: c2dfe3;
+}
+
+
+/* Style the header */
+
+.header {
+	background-color: 1d3557;
+	padding: 30px 40px;
+	color: white;
+	text-align: center;
+}
+
+
+/* Clear floats after the header */
+
+.header:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+h1 {
+	font-style: verdana
+}
+
+#id_table {
+	font-style: verdana border-collapse: collapse;
+	width: 100%;
+}
+
+#id_table td,
+#customers th {
+	border: 1px solid #ddd;
+	padding: 5px;
+}
+
+#id_table tr:hover {
+	background-color: #ddd;
+}
+
+#id_table th {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: center;
+	background-color: 577399;
+	color: white;
+	font-size: 20px;
+}
+
+input[type=text],
+select {
+	width: 100%;
+	padding: 12px 20px;
+	margin: 5px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	font-size: 20px;
+}
+
+input[type=submit] {
+	width: 100%;
+	background-color: 5eb1bf;
+	color: 001d3d;
+	font-size: 20px;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+input[type=submit]:hover {
+	background-color: bee1e6;
+}
+</style>
+
+<body>
+	<div id="myDIV" class="header">
+		<h1>BARANGAY SAP MONITORING SYSTEM</h1>
+		<h2>SAP BENEFICIARIES REGISTRATION</h2>
+		<form method="POST" action="/MNList/new">
+			<input type="text" id="Brgy" name="Brgy" placeholder="Enter Barangay" />
+			<input type="text" id="BrgyID" name="BrgyID" placeholder="Enter Barangay ID" /> {% csrf_token %}
+			<input type="submit" id="bAdd" name="bAdd" value="SUBMIT" class=button> </form>
+	</div>
+	<table id="id_table" name='tr'>
+		<tr>
+			<th>Barangay</th>
+			<th>Barangay Code</th>
+		</tr>
+		<tr> {% for ibrgy in ibrgy_ %}
+			<td>{{ibrgy.bname}}</td>
+			<td>{{ibrgy.bID}}</td>
+		</tr> {% endfor %}
+        </table>
+		
+		
+</body>
+
+</html>
