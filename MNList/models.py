@@ -24,14 +24,16 @@ class SBeneficiary(models.Model):
           db = "beneficiary"	 
           
 class SDistributions(models.Model):
-      dmode = models.TextField(default='')  	
-      ddate = models.DateTimeField(default='')  
+      dtranche = models.TextField(default='') 
+      dmode = models.TextField(default='') 
+      dlocation = models.TextField(default='')
       sbeneficiary = models.ForeignKey(SBeneficiary, default=None, on_delete=models.CASCADE)  
       class meta:
           db = "distribution"	
           
 class StatusDB(models.Model):
       dstatus = models.TextField(default='')
+      dremarks = models.TextField(default='')   	
       ddate = models.DateTimeField(default='')  
       sdistributions = models.ForeignKey(SDistributions, default=None, on_delete=models.CASCADE)
       class meta:

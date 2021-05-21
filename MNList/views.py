@@ -17,10 +17,6 @@ def view_ibrgy(request, ibrgy_id):
    return render(request, 'SInfo.html', {'ibrgy': ibrgy_})
    
 def new_ibrgy(request):   
-  
-	 
-    #newCar = IBrgy.objects.create(bname=request.POST['Brgy'],bID=request.POST['BrgyID'],ibrgy=newCar)
-    #return redirect(f'/MNList/{newCar_.id}/')
     
     newibrgy_ = IBrgy.objects.create(mncplty=request.POST['Municipality'],bname=request.POST['Brgy'],bID=request.POST['BrgyID'])
     return redirect(f'/MNList/{newibrgy_.id}/') 
@@ -37,37 +33,37 @@ def new_ibrgy(request):
 def dtmanipulation(request):
    
     #Creating a data
-    ibrgy= IBrgy(Brgy="Brgy. Victoria", BrgyID="301185")
+    ibrgy= IBrgy(mncplty="Dasmariñas City", bname="Brgy. Victoria", bID="301185")
     ibrgy.save()
     
     #Read All data
     ibrgy = IBrgy.objects.all()
-    result = 'Printing all entries in Carrier model: <br>'
+    result = 'Printing all barangay entries in model: <br>'
     for x in objects:
-        res == x.addFM+"<br>"
+        res += x.bname+"<br>"
         
     #Read a specific data    
-    cname = IBrgy.objects.get(id="Brgy")   
+    ibrgy = IBrgy.objects.get(id="Brgy")   
     res += 'Printing One entry <br>'
-    res += cname.Address
+    res += ibrgy.Brgy
       
     #Delete a data
     res += '<br> Deleting an entry <br>'
-    cname.delete()
+    ibrgy.delete()
     
-    ibrgy = IBrgy.objects.get(name = 'Sasuke Uchiha')
-    ibrgy.addadd = "B 7 L 7"
+    bresidents = BResidents.objects.get(rname = 'Sasuke Uchiha')
+    ibrgy.radd = "B 7 L 7"
     ibrgy.save()
     res = ""
     
     #Filtering data:
-    qs = BResidents.objects.filter(name = "Sasuke Uchiha")
+    qs = BResidents.objects.filter(rname = "Sasuke Uchiha")
     res += "Found: %s results<br>"%len(qs)
     
     #ordering results
-    qs = IBrgy.objects.order_by("Address")
+    qs = IBrgy.objects.order_by("mncplty")
     for x in qs:
-        res += x.addFM + x.addadd +'<br>'
+        res += x.bname + x.bID +'<br>'
 '''      
 
 def MainPage(request): 

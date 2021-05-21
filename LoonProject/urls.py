@@ -4,8 +4,10 @@
 from django.conf.urls import url
 from MNList import views 
 
+from django.contrib import admin
 
 urlpatterns = [    
+    url('admin/', admin.site.urls),
     url(r'^$', views.MainPage, name='mainpage'),    
     url(r'^MNList/new$', views.new_ibrgy, name='new_ibrgy'),    
     url(r'^MNList/(\d+)/$', views.view_ibrgy, name='view_ibrgy'),    
