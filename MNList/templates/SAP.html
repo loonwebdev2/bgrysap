@@ -10,18 +10,16 @@
 {% extends 'base.html' %}
 {% block content %}
 	<div id="myDIV" class="header">
-	<h3>
-		 Welcome, Brgy {{ibrgy.bname}} , {{ibrgy.mncplty}} !
-		</h3>
-		<br>
+	<h2>
+		 {{ibrgy.mncplty}} Brgy {{ibrgy.bname}} Link:Localhost:8000/MNList {{ibrgy.id}} 
+		</h2>
 		<h1>SAP INFORMATION</h1>
 		
 		
-		<br>
-		<form method="POST" action="/MNList/{{ ibrgy.id }}/add_info">
-			<input type="text" id="addFM" name="addFM" placeholder="Enter Family Member" />
-			<input type="text" id="addRS" name="addRS" placeholder="Enter Relation" />
-			<input type="text" id="addadd" name="addadd" placeholder="Enter Address" />
+	
+		<form method="POST" action="/MNList/{{ bresidents.id }}/add_dependent">
+			<input type="text" id="category" name="category" placeholder="Enter Family Member" />
+			<input type="text" id="amount" name="amount" placeholder="Enter Relation" />
 			<input type="submit" id="bAdd" name="bAdd" value="CONFIRM" class=button> {% csrf_token %} </form>
 	</div>
 	<table id="id_table" name='tr'>
