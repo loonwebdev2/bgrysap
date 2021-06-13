@@ -97,12 +97,14 @@ input[type=submit]:hover {
 			<input type="submit" id="bAdd" name="bAdd" value="SUBMIT" class=button> </form>
 	</div>
 	<table id="id_table" name='tr'>
-		<tr>
+		<tr>	
 			<th>Municipality</th>
 			<th>Barangay</th>
 			<th>Barangay Code</th>
 		</tr>
 		<tr> {% for ibrgy in ibrgys %}
+			
+		    
 		        <td>{{ibrgy.mncplty}}</td>
 			<td>{{ibrgy.bname}}</td>
 			<td>{{ibrgy.bID}}</td>
