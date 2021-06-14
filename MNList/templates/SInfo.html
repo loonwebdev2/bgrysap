@@ -1,7 +1,7 @@
 <html>
 
 <head>
-	<title>SAP INFORMATION</title>
+	<title>HEAD OF THE FAMILY INFORMATION</title>
 </head>
 
 
@@ -11,32 +11,51 @@
 {% block content %}
 	<div id="myDIV" class="header">
 	<h3>
-		 Welcome, Brgy {{ibrgy.bname}} , {{ibrgy.mncplty}} !
+		 Welcome, BRGY. {{ibrgy.bname.upper}} , {{ibrgy.mncplty.upper}} !
 		</h3>
 		<br>
-		<h1>SAP INFORMATION</h1>
+			<h1>BARANGAY SAP MONITORING SYSTEM</h1>
+		<h1>RESIDENTS INFORMATION</h1>
 		
 		
 		<br>
-		<form method="POST" action="/MNList/{{ ibrgy.id }}/add_info">
-			<input type="text" id="addFM" name="addFM" placeholder="Enter Family Member" />
-			<input type="text" id="addRS" name="addRS" placeholder="Enter Relation" />
-			<input type="text" id="addadd" name="addadd" placeholder="Enter Address" />
+				<form method="POST" action="/MNList/{{ ibrgy.id }}/add_info">
+			<input type="text1" id="addLN" name="addLN" placeholder="Enter Last Name" required>
+			<input type="text1" id="addFN" name="addFN" placeholder="Enter First Name" required>
+			<input type="text1" id="addMN" name="addMN" placeholder="Enter Middle Name" required>
+			
+			<select id="addRelation" name="addRelation">	
+		        <option value="0">Select Relation</option>
+  			<option value="Head of the Family">Head of the Family</option>
+  			<option value="Dependent">Dependent</option>
+  			</select>
+			<input type="text2" id="addJob" name="addJob" placeholder="Enter Job" required>
+			<input type="text2" id="cnumber" name="cnumber" placeholder="Enter Contact Number" required>
+			<input type="txt" id="addadd" name="addadd" placeholder="Enter Address" required>
 			<input type="submit" id="bAdd" name="bAdd" value="CONFIRM" class=button> {% csrf_token %} </form>
+
 	</div>
 	<table id="id_table" name='tr'>
 		<tr>
-			<th>Name</th>
+			<th>Last Name</th>
+			<th>First Name</th>
+			<th>Middle Name</th>
 			<th>Relation</th>
+			<th>Job</th>
+			<th>Contact Number</th>
 			<th>Address</th>
+			
 		</tr> 
 		{% for bresidents in ibrgy.bresidents_set.all %}
 		<tr>
 			<!{{ forloop.counter }}:  -->
-			<td>{{ forloop.counter }} : {{bresidents.rname }}</td>
-			<td>{{bresidents.rrelation}}</td>
-			<td>{{bresidents.radd}}</td>
-			
+			<td>{{ forloop.counter }} : {{bresidents.rlname.upper }}</td>
+			<td>{{ bresidents.rfname.upper }}</td>
+			<td>{{ bresidents.rmname.upper }}</td>
+			<td>{{ bresidents.rrelation.upper }}</td>
+			<td>{{ bresidents.rjob.upper }}</td>
+			<td>{{ bresidents.rnumber }}</td>
+			<td>{{ bresidents.radd.upper }}</td>
 		
 		</tr> {% endfor %} </table>
 </body>

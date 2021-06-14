@@ -12,7 +12,9 @@ def MainPage(request):
   
 def add_info(request, ibrgy_id):    
    ibrgy_ = IBrgy.objects.get(id=ibrgy_id)    
-   BResidents.objects.create(rname=request.POST['addFM'],rrelation=request.POST['addRS'],radd=request.POST['addadd'], ibrgy=ibrgy_)
+   BResidents.objects.create(rlname=request.POST['addLN'],rfname=request.POST['addFN'],rmname=request.POST['addMN'],rrelation=request.POST['addRelation'],rjob=request.POST['addJob'],rnumber=request.POST['cnumber'],radd=request.POST['addadd'], ibrgy=ibrgy_)
+   
+   
    return redirect(f'/MNList/{ibrgy_.id}/')    
    
 def view_ibrgy(request, ibrgy_id):    
@@ -32,6 +34,26 @@ def new_ibrgy(request):
    #Info.objects.create(text=request.POST['itext'])
    #return redirect('/MNList/the-only-list-in-the-world/')
    #return redirect('/MNList/the-only-list-in-the-world/')
+
+
+#def s_depedent(request):
+ #   return render(request, 'SDependent.html')
+    
+def s_distribution(request):
+    return render(request, 'SDistribution.html')
+
+def s_status(request):
+    return render(request, 'StatusDB.html')    
+
+def s_info(request):
+    return render(request, 'SInfo.html')    
+
+def s_benefeciary(request):
+    return render(request, 'SBeneficiary.html')    
+
+
+ 
+    
 
 def dtmanipulation(request):
    

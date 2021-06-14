@@ -3,6 +3,7 @@
 
 
 <style>
+<style>
 body {
 	margin: 0;
 	min-width: 250px;
@@ -40,6 +41,13 @@ h3 {
   text-align: left;
   font-size: 30px;
 }
+h4 {
+  background-color: 577399;
+  color: #ffffff;
+  padding: 9px;
+  text-align: left;
+  font-size: 30px;
+}
 
 #id_table {
 	font-style: Verdana border-collapse: collapse;
@@ -65,9 +73,9 @@ h3 {
 	font-size: 20px;
 }
 
-input[type=text],
+input[type=txt],
 select {
-	width: 100%;
+	width:100%;
 	padding: 12px 20px;
 	margin: 5px 0;
 	display: inline-block;
@@ -76,7 +84,110 @@ select {
 	box-sizing: border-box;
 	font-size: 20px;
 }
+input[type=job],
+select {
+	width:28%;
+	padding: 12px 20px;
+	margin: 5px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	font-size: 20px;
+}
+input[type=address],
+select {
+	width:70%;
+	padding: 12px 20px;
+	margin: 5px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	font-size: 20px;
+}
+input[type=text],
+select {
+	width: 50%;
+	padding: 12px 20px;
+	margin: 5px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	font-size: 20px;
+}
+input[type=text1],
+select {
+	width: 32.6%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	font-size: 20px;
+}
+input[type=text2],
+select {
+	width: 26.3%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	font-size: 20px;
+}
 
+input[type=text3],
+select {
+	width: 45%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	font-size: 20px;
+	
+}
+input[type=text4],
+select {
+	width: 54%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	font-size: 20px;
+	
+}
+input[type=date],
+select {
+	width: 54.5%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	font-size: 20px;
+}
+
+
+input[type=amount],
+select {
+	width: 45%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+	font-size: 20px;
+}
 input[type=submit] {
 	width: 100%;
 	background-color: 5eb1bf;
@@ -98,56 +209,97 @@ input[type=submit]:hover {
     padding: 0;
     box-sizing: border-box;
 }
-
-.topnav {
-
-  background-color: #333;
+.navbar {
   overflow: hidden;
-
+  background-color: #333;
 }
 
-/* Style the links inside the navigation bar */
-.topnav a {
-  
+.navbar a {
   float: left;
-  display: block;
-  color: #f2f2f2;
+  font-size: 16px;
+  color: white;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  font-size: 17px;
-  font-family: Verdana, sans-serif;
-
 }
 
-/* Change the color of links on hover */
-.topnav a:hover {
-  background-color: #ddd;
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: 577399;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
   color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
 }
 
-/* Add an active class to highlight the current page */
-.topnav a.active {
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.navbar a.active {
   background-color: 1d3557;
   color: white;
-}
-
-/* Hide the link that should open and close the topnav on small screens */
-.topnav .icon {
-  display: none;
 }
 
 </style>
 
 
 
+
 <body>
 
-<div class="topnav" id="myTopnav">
+<div class="navbar" id="myTopnav">
   <a href="http://brgysap.ph/" class="active">Home</a>
-  <a href="sap.html">News</a>
-  <a href="#contact">Contact</a>
-  <a href="#about">About</a>
+  <div class="dropdown">
+
+    <a href="MNList/s_info">Residents</a>
+    <!-- 
+      <button class="dropbtn">Residents
+      <i class="fa fa-caret-down"></i>
+    </button
+    <div class="dropdown-content">
+    <a href="MNList/s_info">Head of the Family</a>
+    <a href="MNList/s_depedent"">Dependent</a>
+    </div>
+--> 
+  </div>
+  
+  <a href="MNList/s_benefeciary">SAP Beneficiary</a>
+  <a href="MNList/s_distribution">SAP Distribution</a>
+  <a href="MNList/s_status">Status</a>
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
   </a>

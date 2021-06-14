@@ -13,7 +13,12 @@ urlpatterns = [
     url(r'^$', views.MainPage, name='mainpage'),    
     url(r'^MNList/new_residents$', views.new_ibrgy, name='new_ibrgy'),    
     url(r'^MNList/(\d+)/$', views.view_ibrgy, name='view_ibrgy'),    
-    url(r'^MNList/(\d+)/add_info$', views.add_info, name='add_info'),]
+    url(r'^MNList/(\d+)/add_info$', views.add_info, name='add_info'),
+       url(r'^MNList/s_info$', views.s_info, name='s_info'),
+    #url(r'^MNList/s_depedent$', views.s_depedent, name='s_depedent'), 
+    url(r'^MNList/s_distribution$', views.s_distribution, name='s_distribution'),
+    url(r'^MNList/s_benefeciary$', views.s_benefeciary, name='s_benefeciary'),   
+    url(r'^MNList/s_status$', views.s_status, name='s_status'),]
     
     
     

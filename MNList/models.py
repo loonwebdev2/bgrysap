@@ -9,15 +9,22 @@ class IBrgy(models.Model):
           db = "brgy"
 	
 class BResidents(models.Model):     
-      rname = models.TextField(default='')  
+      rlname = models.TextField(default='')
+      rfname = models.TextField(default='')
+      rmname = models.TextField(default='')
       rrelation = models.TextField(default='')
-      radd = models.TextField(default='')    
+      rjob = models.TextField(default='') 
+      rnumber = models.IntegerField(default='')  
+      radd = models.TextField(default='')
       ibrgy = models.ForeignKey(IBrgy, default=None, on_delete=models.CASCADE)
       class meta:
           db = "residents"	
-          
+   	
+              
 class SBeneficiary(models.Model):  
+      sincome = models.TextField(default='')
       scategory = models.TextField(default='')
+      sclass = models.TextField(default='')
       samount = models.TextField(default='')
       bresidents = models.ForeignKey(BResidents, default=None, on_delete=models.CASCADE)  
       class meta:
@@ -25,25 +32,23 @@ class SBeneficiary(models.Model):
           
 class SDistributions(models.Model):
       dtranche = models.TextField(default='') 
-      dmode = models.TextField(default='') 
+      dmode = models.TextField(default='')
+      dplace = models.TextField(default='') 
       dlocation = models.TextField(default='')
+      dddate = models.DateTimeField(default='')  
+     
       sbeneficiary = models.ForeignKey(SBeneficiary, default=None, on_delete=models.CASCADE)  
       class meta:
           db = "distribution"	
           
 class StatusDB(models.Model):
-      dstatus = models.TextField(default='')
-      dremarks = models.TextField(default='')   	
       ddate = models.DateTimeField(default='')  
-      sdistributions = models.ForeignKey(SDistributions, default=None, on_delete=models.CASCADE)
+      dstatus = models.TextField(default='')
+      dperson = models.TextField(default='')
+      dremarks = models.TextField(default='') 
+      bresidents = models.ManyToManyField(BResidents, default=None)  
+      sbeneficiary = models.ManyToManyField(SBeneficiary, default=None)   	
+
       class meta:
           db = "status"	  
-'''    
 
-class Info(models.Model):    
-    
-    textFM = models.TextField(default='')  
-    textRS = models.TextField(default='')
-    textAdd = models.TextField(default='')    
-    ibrgy = models.ForeignKey(IBrgy, default=None, on_delete=models.PROTECT)
-    '''
