@@ -25,9 +25,9 @@ SECRET_KEY = '7r7s97x7jfso5wype(v#gtm=4u%k26klvxzh#9g%^25c=rt-6e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['brgysap.ph']
+ALLOWED_HOSTS = ['loon.pythonanywhere.com']
 
-
+#loon.pythonanywhere.com
 # Application definition
 
 INSTALLED_APPS = [
@@ -64,9 +64,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-          
-		
-            ],	 
+
+
+            ],
         },
     },
 ]
