@@ -19,7 +19,7 @@
 	<h4>
 		 NAME: {{ibrgy.dlname.upper}},{{ibrgy.dfname.upper}} {{ibrgy.dmname.upper}}.  
 		</h4>
-		<form method="POST" action="/MNList/new_residents">		          
+		<form method="POST" action="/MNList/{{ ibrgy.id }}/add_info">		          
 		     
 		        <select id="btranche" name="btranche" onchange="random_function()">
 		        <option value="0">Select Trance</option>
@@ -37,11 +37,11 @@
           		 <select id="output" onchange="random_function1()">
           		 </select>
        	
-			
+		
 			<input type="txt" id="blocation" name="blocation" placeholder="Enter Location" required><br>
-			
+				 {% csrf_token %}
 			<input type="submit" id="bAdd" name="bAdd" value="SUBMIT" class=button> </form>
-			 {% csrf_token %}
+				
 			
 			
 			        <script>
@@ -89,7 +89,7 @@
 			
 		</tr> 
 	
-		<tr>
+		<tr>{% for ibrgy in ibrgys %}
 			<td>{{ bresidents.rlname.upper }}</td>
 			<td>{{ bresidents.rfname.upper }}</td>
 			<td>{{ bresidents.rmname.upper }}</td>
@@ -101,7 +101,7 @@
 			<td>{{ bresidents.dlocation.upper }}</td>
 		
 		
-		</tr> </table>
+		</tr>{% endfor %}</table>
 </body>
 {% endblock %}
 </html>

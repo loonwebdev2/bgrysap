@@ -14,11 +14,11 @@ urlpatterns = [
     url(r'^MNList/new_residents$', views.new_ibrgy, name='new_ibrgy'),    
     url(r'^MNList/(\d+)/$', views.view_ibrgy, name='view_ibrgy'),    
     url(r'^MNList/(\d+)/add_info$', views.add_info, name='add_info'),
-       url(r'^MNList/s_info$', views.s_info, name='s_info'),
+       url(r'^s_info$', views.s_info, name='s_info'),
     #url(r'^MNList/s_depedent$', views.s_depedent, name='s_depedent'), 
-    url(r'^MNList/s_distribution$', views.s_distribution, name='s_distribution'),
-    url(r'^MNList/s_benefeciary$', views.s_benefeciary, name='s_benefeciary'),   
-    url(r'^MNList/s_status$', views.s_status, name='s_status'),]
+    url(r'^s_distribution$', views.s_distribution, name='s_distribution'),
+    url(r'^s_benefeciary$', views.s_benefeciary, name='s_benefeciary'),   
+    url(r'^s_status$', views.s_status, name='s_status'),]
     
     
     
@@ -34,17 +34,13 @@ replace updater with your app-name where you have your views.py
     
 
 '''
-
 urlpatterns = [    
     url(r'^new$', views.new_list, name='new_list'),    
     url(r'^(\d+)/$', views.view_list, name='view_list'),   
     url(r'^(\d+)/add_item$', views.add_item, name='add_item'),]
-
-
 from django.conf.urls import include, url
 from MNList import views as list_views  
 from MNList import urls as list_urls  
-
 urlpatterns = [    
     url(r'^$', views.MainPage, name='mainpage'), 
     url(r'^MNList/', include(list_urls)),  ]
@@ -59,17 +55,12 @@ urlpatterns = [
     url(r'^MNList/new$', views.new_list, name='new_list'),    
     url(r'^MNList/(d.+)/$', views.view_list, name='view_list'),
 ]    
-
-
 urlpatterns = [   
     url(r'^$', views.MainPage, name='home'),       
     url(r'^MNList/new$', views.new_list, name='new_list'),    
     url(r'^MNList/the-only-list-in-the-world/$', views.view_list, name='view_list'),]
-
-
 '''
 """RloonProject URL Configuration
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.1/topics/http/urls/
 Examples:
@@ -83,4 +74,5 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 
