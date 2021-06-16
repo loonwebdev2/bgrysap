@@ -20,7 +20,7 @@
 		<h4>
 		 NAME: {{ibrgy.dlname.upper}},{{ibrgy.dfname.upper}} {{ibrgy.dmname.upper}}.  
 		</h4>
-		<form method="POST" action="/MNList/new_residents">	
+		<form method="POST" action="/MNList/{{ ibrgy.id }}/add_info">
 		
 			<input type="text4" id="bincome" name="bincome" placeholder="Monthly Income" required>
 			
@@ -41,6 +41,8 @@
   			<option value="0">High-income Class</option>
 			</select>
 			
+		
+
 			<input type="text4" id="bamount" name="bamount" placeholder="Amount">
 			 {% csrf_token %}
 			<input type="submit" id="bAdd" name="bAdd" value="SUBMIT" class=button> </form>

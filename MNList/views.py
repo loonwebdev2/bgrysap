@@ -1,3 +1,4 @@
+
 #from django.http import HttpResponse    
 from django.shortcuts import redirect, render
 from MNList.models import BResidents, IBrgy, SBeneficiary, SDistributions, StatusDB
@@ -113,7 +114,6 @@ def update(request):
         
         
 '''      
-
 def MainPage(request): 
    if request.method == 'POST':    
      #new_itext = request.POST['itext']  

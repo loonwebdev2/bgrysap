@@ -22,7 +22,7 @@ class BResidents(models.Model):
    	
               
 class SBeneficiary(models.Model):  
-      sincome = models.TextField(default='')
+      sincome = models.IntegerField(default='')
       scategory = models.TextField(default='')
       sclass = models.TextField(default='')
       samount = models.TextField(default='')
