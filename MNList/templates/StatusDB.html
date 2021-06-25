@@ -19,25 +19,22 @@
 	<h4>
 		 NAME: {{ibrgy.dlname.upper}},{{ibrgy.dfname.upper}} {{ibrgy.dmname.upper}}.  
 		</h4>
-		<form method="POST" action="/MNList/new_residents">
+		<form method="POST" action="/add_status">
 			<select id="sstatus" name="sstatus">	
 		        <option value="0">Select Status</option>
-  			<option value="1">Claimed</option>
-  			<option value="2">Unclaimed</option>
+  			<option value="Claimed">Claimed</option>
+  			<option value="Unclaimed">Unclaimed</option>
   			</select>
 			<input type="date" id="sdate" name="sdate">
 			<input type="txt" id="sperson" name="sperson" placeholder="Name of Person Administered"> 
 			<input type="txt" id="sremark" name="sremarks" placeholder="Enter Remarks"> {% csrf_token %}
 			<input type="submit" id="bAdd" name="bAdd" value="SUBMIT" class=button> </form>
 	</div>
-	
 
 		<table id="id_table" name='tr'>
 		<tr>
-			<th>Last Name</th>
-			<th>First Name</th>
-			<th>Middle Name</th>
-			<th>Amount</th>
+		
+			
 			<th>Status</th>
 			<th>Date</th>
 			<th>Administered by</th>
@@ -46,20 +43,16 @@
 			
 		</tr> 
 	
-		<tr>
-			<td>{{ bresidents.rlname.upper }}</td>
-			<td>{{ bresidents.rfname.upper }}</td>
-			<td>{{ bresidents.rmname.upper }}</td>
-			<td>{{ bresidents.samount.upper }}</td>
-			<td>{{ bresidents.dstatus.upper }}</td>
-			<td>{{ bresidents.ddate.upper }}</td>
-			<td>{{ bresidents.dperson.upper }}</td>
-			<td>{{ bresidents.dremarks.upper }}</td>
-
-		
+		<tr>{% for statusdb in statusdb %}
+			<td>{{ statusdb.dstatus.upper }}</td>
+			<td>{{ statusdb.ddate.upper }}</td>
+			<td>{{ statusdb.dperson.upper }}</td>
+			<td>{{ statusdb.dremarks.upper }}</td>
+	 
+  			  {% endfor %}
 		
 		</tr> </table>
-		
+	
 </body>
 {% endblock %}
 </html>

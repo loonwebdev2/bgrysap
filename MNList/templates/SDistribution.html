@@ -16,18 +16,86 @@
 	<div id="myDIV" class="header">
 		<h1>BARANGAY SAP MONITORING SYSTEM</h1>
 		<h2>SAP DISTRIBUTION</h2>
+		
 	<h4>
 		 NAME: {{ibrgy.dlname.upper}},{{ibrgy.dfname.upper}} {{ibrgy.dmname.upper}}.  
 		</h4>
-		<form method="POST" action="/MNList/{{ ibrgy.id }}/add_info">		          
-		     
-		        <select id="btranche" name="btranche" onchange="random_function()">
+		<form method="POST" action="/add_distribution">
+		
+       		
+       	      <input type="txt" id="bmode" name="bmode" placeholder="Enter Mode of Payment ">		          
+	  	      <input type="txt" id="btype" name="btype" placeholder="Enter Digital Payment">
+	  	      <input type="txt" id="blocation" name="blocation" placeholder="Enter Location/Description">
+	  	       {% csrf_token %}
+			<input type="submit" id="bAdd" name="bAdd" value="SUBMIT" class=button> </form>
+			
+       	 <!-- 
+       	 
+       	 <input type="txt" id="bbank" name="bbank"  placeholder="Enter Bank" required>	 
+	  	      <input type="txt" id="bdigital" name="bdigital" placeholder="Enter Digital Payment" required> 	
+	  	   <script>     
+	  	      function mode()
+	  	      {
+	  	      var status = document.getElementById("bmode")
+	  	      if (status.value == "Select")
+	  	      {
+	  	     document.getElementById("bbank").style.visibility="hidden";
+	  	     document.getElementById("bothers").style.visibility="hidden";
+	  	     document.getElementById("bdigital").style.visibility="hidden";
+	  	      }
+	  	      else if (status.value == "Bank")
+	  	      {
+	  	     document.getElementById("bbank").style.visibility="visible";
+	  	     document.getElementById("bothers").style.visibility="hidden";
+	  	     document.getElementById("bdigital").style.visibility="hidden";
+	  	      } else if (status.value == "Digital Payment")
+	  	      {
+	  	     document.getElementById("bdigital").style.visibility="visible";
+	  	     document.getElementById("bbank").style.visibility="hidden";
+	  	     document.getElementById("bothers").style.visibility="hidden";
+	  	      } else if (status.value == "Others")
+	  	       {
+	  	       document.getElementById("bbank").style.visibility="hidden";
+	  	       document.getElementById("bdigital").style.visibility="hidden";
+	  	       document.getElementById("bothers").style.visibility="visible";
+	  	  
+	  	      }
+	  	  
+	  	     
+	  	      }
+		  </script>	
+       	 
+       	   <input type="txt" id="btranche" name="btranche" placeholder="Enter Trance" required>
+		      <input type="txt" id="bmode" name="bmode" placeholder="Enter Mode of Distribution" required>
+       	 	      
+	 {% for sdistribution in sdistribution %}
+		        <select id="bmode" name="bmode">
+		        <option value="0">tranche</option>
+			<option value="{{ sdistribution.dtranche }}">{{ sdistribution.dtranche }}</option>
+		
+			</select>
+			<select id="bmode" name="bmode">
+		        <option value="0">mode</option>
+			<option value="{{ sdistribution.dmode }}">{{ sdistribution.dmode }}</option>
+			</select>
+			<select id="bmode" name="bmode">
+		        <option value="0">Place</option>
+			<option value="{{ sdistribution.dplace }}">{{ sdistribution.dplace }}</option>
+			</select>
+			{% endfor %}
+			
+			
+       	   {% for bresidents in ibrgy.bresidents_set.all %}
+		        <option value="0">Select Relation</option>
+			<option value="{{ bresidents.rfname }}">{{ bresidents.rfname }}</option>
+			{% endfor %}
+     	        <select id="btranche" name="btranche" onchange="random_function()">
 		        <option value="0">Select Trance</option>
   			<option value="1">1st Tranche</option>
   			<option value="2">2nd Tranche</option>
   			<option value="3">3rd Tranche</option>
 			</select>
-			<input type="date" id="sddate" name="sddate">
+		
 			<select id="input" onchange="random_function()">
            		<option>Select Mode of Distribution</option>
             		<option>Bank</option>
@@ -36,15 +104,9 @@
        		</select>
           		 <select id="output" onchange="random_function1()">
           		 </select>
-       	
-		
-			<input type="txt" id="blocation" name="blocation" placeholder="Enter Location" required><br>
-				 {% csrf_token %}
-			<input type="submit" id="bAdd" name="bAdd" value="SUBMIT" class=button> </form>
-				
-			
-			
-			        <script>
+
+
+  <script>
             function random_function()
             {
                 var a=document.getElementById("input").value;
@@ -70,36 +132,53 @@
             }
         </script>
 </script>
+--> 
+		
+			
+				
+			
+			
+			      
 
 	</div>
 	
+<script>
+function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+
+
+ 
+<a href="#test1" onclick="myFunction()""><b><p>Add Distribution</p><b></a><br />
 
 
 		<table id="id_table" name='tr'>
 		<tr>
-			<th>Last Name</th>
-			<th>First Name</th>
-			<th>Middle Name</th>
-			<th>Class</th>
-			<th>Amount</th>
-			<th>Tranche</th>
+		
 			<th>Mode</th>
-			<th>Place</th>
-			<th>Location</th
+			<th>Type</th>
+			<th>Location/Description</th>
+			<th>Action</th>
+			
 			
 		</tr> 
-	
-		<tr>{% for ibrgy in ibrgys %}
-			<td>{{ bresidents.rlname.upper }}</td>
-			<td>{{ bresidents.rfname.upper }}</td>
-			<td>{{ bresidents.rmname.upper }}</td>
-			<td>{{ bresidents.sclass.upper }}</td>
-			<td>{{ bresidents.samount.upper }}</td>
-			<td>{{ bresidents.dtranche.upper }}</td>
-			<td>{{ bresidents.dmode.upper }}</td>
-			<td>{{ bresidents.dplace.upper }}</td>
-			<td>{{ bresidents.dlocation.upper }}</td>
 		
+		
+		
+		
+	
+		<tr>{% for sdistribution in sdistribution %}
+			
+			<td>{{ sdistribution.dmode.upper }}</td>
+			<td>{{ sdistribution.dtype.upper }}</td>
+			<td>{{ sdistribution.dlocation.upper }}</td>
+			<td><center><a class="btn btn-sm btn-warning" href="modify/{{ sdistribution.id }}"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a class="btn btn-sm btn-danger" href="remove/{{ sdistribution.id }}"><span class="glyphicon glyphicon-trash"></span> Delete</a></center></td>
 		
 		</tr>{% endfor %}</table>
 </body>

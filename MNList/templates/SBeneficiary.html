@@ -17,21 +17,31 @@
 		
 		<h1>BARANGAY SAP MONITORING SYSTEM</h1>
 		<h2>SAP BENEFICIARIES REGISTRATION</h2>
+
+
 		<h4>
-		 NAME: {{ibrgy.dlname.upper}},{{ibrgy.dfname.upper}} {{ibrgy.dmname.upper}}.  
+		{% for bresidents in ibrgy.bresidents_set.all %}
+		 NAME: {{ bresidents.rlname.upper }},{{ bresidents.rfname.upper }} {{ bresidents.rmname.upper }}. 
+		{% endfor %}
 		</h4>
-		<form method="POST" action="/MNList/{{ ibrgy.id }}/add_info">
-		
+		<form method="POST" action="/{{ ibrgy.id }}/add_beneficiary">
+			<select id="btranche" name="btranche" onchange="random_function()">
+		        <option value="0">Select Trance</option>
+  			<option value="1">1st Tranche</option>
+  			<option value="2">2nd Tranche</option>
+  			<option value="3">3rd Tranche</option>
+			</select>
+			
 			<input type="text4" id="bincome" name="bincome" placeholder="Monthly Income" required>
 			
 			<select id="bcategory" name="bcategory">
 		        <option value="0">Select Existing Beneficiary</option>
-  			<option value="1">4ps Beneficiary</option>
-  			<option value="2">UCT Beneficiary</option>
-  			<option value="3">Indigenous Group</option>
-  			<option value="4">Solo Parent</option>
-  			<option value="5">Senior Citizen</option>
-  			<option value="6">None</option>
+  			<option value="4ps Beneficiary">4ps Beneficiary</option>
+  			<option value="UCT Beneficiary">UCT Beneficiary</option>
+  			<option value="Indigenous Group">Indigenous Group</option>
+  			<option value="Solo Parent">Solo Parent</option>
+  			<option value="Senior Citize">Senior Citizen</option>
+  			<option value="None">None</option>
   			</select>	          
 		     
 		        <select id="bclass" name="bclass" onchange="cclass();">
@@ -41,7 +51,24 @@
   			<option value="0">High-income Class</option>
 			</select>
 			
+			  {% for sdistribution in sdistribution %}
+		        <select id="bmode" name="bmode">
+		        <option value="0">Mode of Payment</option>
+			<option value="{{ sdistribution.dmode }}">{{ sdistribution.dmode }}</option>
 		
+			</select>
+			<select id="bmode" name="bmode">
+		        <option value="0">Type</option>
+			<option value="{{ sdistribution.dtype }}">{{ sdistribution.dtype }}</option>
+			</select>
+			<select id="bmode" name="bmode">
+		        <option value="0">Location</option>
+			<option value="{{ sdistribution.dlocation }}">{{ sdistribution.dlocation }}</option>
+			</select>
+		
+			
+			
+			{% endfor %}
 
 			<input type="text4" id="bamount" name="bamount" placeholder="Amount">
 			 {% csrf_token %}
@@ -56,33 +83,35 @@ function cclass()
 	var displaytext=d.options[d.selectedIndex].value;
 	document.getElementById("bamount").value=displaytext;
 }
+
+
+
+
 </script>
 
-	</div>
+
 	
 
 
 	<table id="id_table" name='tr'>
 		<tr>	
-			<th>Last Name</th>
-			<th>First Name</th>
-			<th>Middle Name</th>
+			
 			<th>Monthly Income</th>
 			<th>Existing Beneficiary</th>
 			<th>Class</th>
 			<th>Amount</th>
 		
 			
-		</tr>
-		<tr> {% for ibrgy in ibrgys %}
+		</tr> 
+			{% for bresidents in ibrgy.bresidents_set.all %}
+	
+		<tr>
 			
-		        <td>{{ bresidents.rlname.upper }}</td>
-			<td>{{ bresidents.rfname.upper }}</td>
-			<td>{{ bresidents.rmname.upper }}</td>
-			<td>{{ bresidents.sincome.upper }}</td>
-			<td>{{ bresidents.scategory.upper }}</td>
-			<td>{{ bresidents.sclass.upper }}</td>
-			<td>{{ bresidents.samount.upper }}</td>
+			<td>{{ sbeneficiary.sincome.upper }}</td>
+			<td>{{ sbeneficiary.sincome.upper }}</td>
+			<td>{{ sbeneficiary.scategory.upper }}</td>
+			<td>{{ sbeneficiary.sclass.upper }}</td>
+			<td>{{ sbeneficiary.samount.upper }}</td>
 
 		
 		</tr> {% endfor %}

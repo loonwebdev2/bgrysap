@@ -22,6 +22,7 @@ class BResidents(models.Model):
    	
               
 class SBeneficiary(models.Model):  
+      stranche = models.TextField(default='') 
       sincome = models.IntegerField(default='')
       scategory = models.TextField(default='')
       sclass = models.TextField(default='')
@@ -30,24 +31,25 @@ class SBeneficiary(models.Model):
       class meta:
           db = "beneficiary"	 
           
-class SDistributions(models.Model):
-      dtranche = models.TextField(default='') 
-      dmode = models.TextField(default='')
-      dplace = models.TextField(default='') 
+class SDistributions(models.Model): 
+      dmode = models.TextField(default='') 
+      dtype = models.TextField(default='') 
       dlocation = models.TextField(default='')
-      dddate = models.DateTimeField(default='')  
+    
+      #dddate = models.DateTimeField(default='')  
      
-      sbeneficiary = models.ForeignKey(SBeneficiary, default=None, on_delete=models.CASCADE)  
       class meta:
           db = "distribution"	
           
-class StatusDB(models.Model):
-      ddate = models.DateTimeField(default='')  
+class StatusDB(models.Model):	
+      sdistribution = models.ManyToManyField(SDistributions, default=None)  	
+      bresidents = models.ManyToManyField(BResidents, default=None)  
+      sbeneficiary = models.ManyToManyField(SBeneficiary, default=None)  
+      ddate = models.DateField(default='')  
       dstatus = models.TextField(default='')
       dperson = models.TextField(default='')
       dremarks = models.TextField(default='') 
-      bresidents = models.ManyToManyField(BResidents, default=None)  
-      sbeneficiary = models.ManyToManyField(SBeneficiary, default=None)   	
+  	
 
       class meta:
           db = "status"	  

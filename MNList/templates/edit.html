@@ -1,0 +1,44 @@
+<html>
+
+<head>
+	<title>HEAD OF THE FAMILY INFORMATION</title>
+</head>
+
+
+<body>
+
+{% extends 'base.html' %}
+{% block content %}
+<div id="myDIV" class="header">
+	<h3>
+		 Welcome, BRGY. {{ibrgy.bname.upper}} , {{ibrgy.mncplty.upper}} !
+		</h3>
+		<br>
+			<h1>BARANGAY SAP MONITORING SYSTEM</h1>
+		<h1>BRGY REGISTRATION UPDATE</h1>
+		
+		
+		<br>
+			
+				<form method="POST" action="update/{{ ibrgys.id }}">
+        {% csrf_token %}
+        
+            <label for="BrgyID">BARANGAY ID</label>
+            <input type="txt" name="BrgyID" value="{{ ibrgys.bID }}" required="required"/>
+
+             <label for="Brgy">BARANGAY</label>
+            <input type="txt" name="Brgy" value="{{ ibrgys.bname }}" required="required"/>
+            
+  	     <label for="Municipality">MUNICIPALITY</label>
+            <input type="txt" name="Municipality" value="{{ ibrgys.mncplty }}" required="required"/>
+
+
+	    
+
+         
+            <button type="submit">Update</button>
+     </div>
+    </form>
+</body>
+{% endblock %}
+</html>

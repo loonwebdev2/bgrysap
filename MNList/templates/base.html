@@ -1,7 +1,6 @@
 
 <html>
 
-
 <style>
 <style>
 body {
@@ -58,6 +57,7 @@ h4 {
 #customers th {
 	border: 1px solid #ddd;
 	padding: 5px;
+	text-align: center;
 }
 
 #id_table tr:hover {
@@ -212,6 +212,19 @@ input[type=submit] {
 	cursor: pointer;
 }
 
+button {
+	width: 100%;
+	background-color: 5eb1bf;
+	color: 001d3d;
+	font-size: 20px;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+
 input[type=submit]:hover {
 	background-color: bee1e6;
 }
@@ -286,6 +299,27 @@ input[type=submit]:hover {
   color: white;
 }
 
+
+p{
+font-family: Verdana, sans-serif;
+  background-color: #000018;
+  color: white;
+  font-size: 25px;  
+  padding: 14px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  width:100%
+}
+label {
+color: #00FFFF;
+font-weight: bold;
+display: block;
+
+float: left;
+}
+
+
 </style>
 
 
@@ -295,10 +329,11 @@ input[type=submit]:hover {
 
 <div class="navbar" id="myTopnav">
   <a href="http://brgysap.ph/" class="active">Home</a>
+    <!-- 
   <div class="dropdown">
 
-    <a href="s_info">Residents</a>
-    <!-- 
+    <a href="/s_info">Residents</a>
+ 
       <button class="dropbtn">Residents
       <i class="fa fa-caret-down"></i>
     </button
@@ -306,12 +341,14 @@ input[type=submit]:hover {
     <a href="MNList/s_info">Head of the Family</a>
     <a href="MNList/s_depedent"">Dependent</a>
     </div>
---> 
+
   </div>
   
-  <a href="s_benefeciary">SAP Beneficiary</a>
-  <a href="s_distribution">SAP Distribution</a>
-  <a href="s_status">Status</a>
+  <a href="/beneficiary">SAP Beneficiary</a>
+  --> 
+  <a href="/distribution">SAP Distribution</a>
+  <a href="/status">Status</a>
+  <a href="/about">About</a>
   <a href="javascript:void(0);" class="icon" onclick="myFunction()">
     <i class="fa fa-bars"></i>
   </a>

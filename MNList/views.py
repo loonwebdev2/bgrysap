@@ -5,56 +5,129 @@ from MNList.models import BResidents, IBrgy, SBeneficiary, SDistributions, Statu
 #import git
 from django.views.decorators.csrf import csrf_exempt
 
-
+#1st page
 def MainPage(request): 
-     ibrgys = IBrgy.objects.all()
-     return render(request, 'BSMS.html',{'ibrgys' : ibrgys})
-     
-  
-def add_info(request, ibrgy_id):    
-   ibrgy_ = IBrgy.objects.get(id=ibrgy_id)    
-   BResidents.objects.create(rlname=request.POST['addLN'],rfname=request.POST['addFN'],rmname=request.POST['addMN'],rrelation=request.POST['addRelation'],rjob=request.POST['addJob'],rnumber=request.POST['cnumber'],radd=request.POST['addadd'], ibrgy=ibrgy_)
+   ibrgys = IBrgy.objects.all()
+   #ibrgys = IBrgy.objects.filter(mncplty="DASMARINAS")
    
+   ibrgys = IBrgy.objects.order_by("bname")
+ 
+        
+   return render(request, 'BSMS.html',{'ibrgys' : ibrgys})
    
-   return redirect(f'/MNList/{ibrgy_.id}/')    
-   
-def view_ibrgy(request, ibrgy_id):    
-   ibrgy_ = IBrgy.objects.get(id=ibrgy_id)
-   return render(request, 'SInfo.html', {'ibrgy': ibrgy_})
-   
+#data ng 1st page     
 def new_ibrgy(request):   
     
-    newibrgy_ = IBrgy.objects.create(mncplty=request.POST['Municipality'],bname=request.POST['Brgy'],bID=request.POST['BrgyID'])
-    return redirect(f'/MNList/{newibrgy_.id}/') 
+   newibrgy_ = IBrgy.objects.create(mncplty=request.POST['Municipality'],bname=request.POST['Brgy'],bID=request.POST['BrgyID'])
+   return redirect(f'/{newibrgy_.id}/')    
+   
+   
+   
+#2nd page     
+def view_ibrgy(request, ibrgy_id):   
+   bresident_ = BResidents.objects.all()  
+   bresident_ = BResidents.objects.order_by("rlname")
   
-   #ibrgy_ = IBrgy.objects.create()
-   #Info.objects.create(ibrgy=ibrgy_)
-   #return redirect(f'/MNList/{ibrgy_.id}/')
+   
+   bresident_ = BResidents.objects.filter(rrelation="Head of the Family")
+   #bresident_ = BResidents.objects.filter(rfname="RAYMOND")
+   sdistributions = SDistributions.objects.all()  
+   ibrgy_ = IBrgy.objects.get(id=ibrgy_id)
+   return render(request, 'SInfo.html', {'ibrgy': ibrgy_,'sdistribution' : sdistributions,'bresidents' : bresident_}) 
+   
+#data ng 2nd page  
+def add_info(request, ibrgy_id):    
+   ibrgy_ = IBrgy.objects.get(id=ibrgy_id)    
     
-   #return redirect('/MNList/the-only-list-in-the-world/')
-   #Info.objects.create(text=request.POST['itext'])
-   #return redirect('/MNList/the-only-list-in-the-world/')
-   #return redirect('/MNList/the-only-list-in-the-world/')
+   BResidents.objects.create(rlname=request.POST['addLN'],rfname=request.POST['addFN'],rmname=request.POST['addMN'],rrelation=request.POST['addRelation'],rjob=request.POST['addJob'],rnumber=request.POST['cnumber'],radd=request.POST['addadd'], ibrgy=ibrgy_)
+   #sbeneficiary=SBeneficiary(sincome=request.POST['bincome'],scategory=request.POST['bcategory'],sclass=request.POST['bclass'],samount=request.POST['bamount'])
+   #sbeneficiary.save()
+   
+   
+   return redirect(f'/{ibrgy_.id}/')     
 
 
-#def s_depedent(request):
- #   return render(request, 'SDependent.html')
-    
-def s_distribution(request):
-    return render(request, 'SDistribution.html')
-
-def s_status(request):
-    return render(request, 'StatusDB.html')    
-
-def s_info(request):
-    return render(request, 'SInfo.html')    
-
-def s_benefeciary(request):
-    return render(request, 'SBeneficiary.html')    
-
-
+#3rd page     
+def view_beneficiary(request, ibrgy_id): 
+   sdistributions = SDistributions.objects.all()  
+   ibrgy_ = IBrgy.objects.get(id=ibrgy_id)
+   return render(request, 'SBeneficiary.html', {'ibrgy': ibrgy_,'sdistribution' : sdistributions}) 
+   
+   
+   
+#data ng 3rd page  
+def add_beneficiary(request, ibrgy_id):    
+   ibrgy_ = IBrgy.objects.get(id=ibrgy_id)    
+   SBeneficiary.objects.create(sincome=request.POST['bincome'],scategory=request.POST['bcategory'],sclass=request.POST['bclass'],samount=request.POST['bamount'])
  
+   return redirect(f'/{ibrgy_.id}/distribution')  
+
+   
+ #4th page     
+def view_distribution(request):
+   #ibrgy_ = IBrgy.objects.get(id=ibrgy_id)
+   sdistributions = SDistributions.objects.all()
+   return render(request, 'SDistribution.html', {'sdistribution' : sdistributions})  
+   #return render(request, 'SDistribution.html', {'ibrgy': ibrgy_ ,'sdistribution' : sdistributions})     
     
+
+   
+def add_distribution(request):   
+   sdistributions = SDistributions(dmode=request.POST['bmode'],dtype=request.POST['btype'],dlocation=request.POST['blocation'])
+   sdistributions.save()
+   
+   return redirect('/distribution')
+      
+
+def s_status(request):     
+   return render(request, 'StatusDB.html') 
+   
+def s_about(request):     
+   return render(request, 'about.html') 
+#def create(request):
+#   ibrgy = IBrgy(mncplty=request.POST['Municipality'],bname=request.POST['Brgy'],bID=request.POST['BrgyID'])
+#   ibrgy.save()
+#   return redirect('/')
+ 
+def edit(request, id):
+   ibrgys = IBrgy.objects.get(id=id)
+   context = {'ibrgys': ibrgys}
+   return render(request, 'edit.html', context)
+ 
+def update(request, id):
+   ibrgy = IBrgy.objects.get(id=id)
+   ibrgy.mncplty = request.POST['Municipality']
+   ibrgy.bname = request.POST['Brgy']
+   ibrgy.bID = request.POST['BrgyID']
+   ibrgy.save()
+   return redirect('/')
+ 
+def delete(request, id):
+   ibrgy = IBrgy.objects.get(id=id)
+   ibrgy.delete()
+   return redirect('/')    
+  
+  
+  
+def modify(request, id):
+   sdistributions = SDistributions.objects.get(id=id)
+   context = {'sdistribution': sdistributions}
+   return render(request, 'remove.html', context)
+ 
+def mupdate(request, id):
+   sdistribution = SDistributions.objects.get(id=id)
+   sdistribution.dmode = request.POST['bmode']
+   sdistribution.dtype = request.POST['btype']
+   sdistribution.dlocation = request.POST['blocation']
+   sdistribution.save()
+   return redirect('/distribution')
+ 
+def remove(request, id):
+   sdistribution = SDistributions.objects.get(id=id)
+   sdistribution.delete()
+   return redirect('/distribution')    
+  
+
 
 def dtmanipulation(request):
    
@@ -90,16 +163,42 @@ def dtmanipulation(request):
     qs = IBrgy.objects.order_by("mncplty")
     for x in qs:
         res += x.bname + x.bID +'<br>'
-        
-        
+
+
+
+
+
+#5th page     
+def view_status(request): 
+   ibrgy = IBrgy.objects.get(id=id)
+   statusdbs = StatusDB.objects.all()
+   return render(request, 'StatusDB.html', {'ibrgys' : ibrgys}, {'statusdb' : statusdbs})  
+
+
+#data ng 5th page  
+def add_status(request):   
+   statusdbs = StatusDB(ddate=request.POST['sdate'],dstatus=request.POST['sstatus'],dperson=request.POST['sperson'],dremarks=request.POST['sremarks'])
+   statusdbs.save()
+   
+   return redirect(f'/status')
+         
+   
+
+ 
+    
+
+   
+
+           
+'''            
 @csrf_exempt
 def update(request):
     if request.method == "POST":
-        '''
+     
         pass the path of the diectory where your project will be 
         stored on PythonAnywhere in the git.Repo() as parameter.
         Here the name of my directory is "test.pythonanywhere.com"
-        '''
+      
         repo = git.Repo("test.pythonanywhere.com/") 
         origin = repo.remotes.origin
 
@@ -113,7 +212,27 @@ def update(request):
         
         
         
-'''      
+
+
+   
+#3rd page     
+def view_beneficiary(request, ibrgy_id):    
+   #sbeneficiarys = SBeneficiary.objects.all()
+   #return render(request, 'SBeneficiary.html',{'sbeneficiarys' : sbeneficiarys})
+   ibrgy_ = IBrgy.objects.get(id=ibrgy_id) 
+   return render(request, 'SBeneficiary.html', {'ibrgy': ibrgy_})   
+  
+   
+#data ng 3rd page  
+def add_beneficiary(request, ibrgy_id):    
+   ibrgy_ = IBrgy.objects.get(id=ibrgy_id)    
+   SBeneficiary.objects.create(sincome=request.POST['bincome'],scategory=request.POST['bcategory'],sclass=request.POST['bclass'],samount=request.POST['bamount'],ibrgy=ibrgy_)
+   
+   return redirect(f'/{ibrgy_.id}/')  
+   
+
+
+
 def MainPage(request): 
    if request.method == 'POST':    
      #new_itext = request.POST['itext']  

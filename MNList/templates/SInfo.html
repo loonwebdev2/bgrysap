@@ -1,7 +1,7 @@
 <html>
 
 <head>
-	<title>HEAD OF THE FAMILY INFORMATION</title>
+	<title>RESIDENTS INFORMATION</title>
 </head>
 
 
@@ -19,24 +19,113 @@
 		
 		
 		<br>
-				<form method="POST" action="/MNList/{{ ibrgy.id }}/add_info">
-			<input type="text1" id="addLN" name="addLN" placeholder="Enter Last Name" required>
-			<input type="text1" id="addFN" name="addFN" placeholder="Enter First Name" required>
-			<input type="text1" id="addMN" name="addMN" placeholder="Enter Middle Name" required>
+				<form method="POST" action="/{{ ibrgy.id }}/add_info">
+			<input type="text1" id="addLN" name="addLN" placeholder="Enter Last Name" >
+			<input type="text1" id="addFN" name="addFN" placeholder="Enter First Name" >
+			<input type="text1" id="addMN" name="addMN" placeholder="Enter Middle Name" >
 			
 			<select id="addRelation" name="addRelation">	
 		        <option value="0">Select Relation</option>
   			<option value="Head of the Family">Head of the Family</option>
   			<option value="Dependent">Dependent</option>
   			</select>
-			<input type="text2" id="addJob" name="addJob" placeholder="Enter Job" required>
+  			
+  		
+  		
+		     
 		
-  <input type="tel" id="cnumber" name="cnumber" placeholder="Enter Contact Number" required>
+      
+			<input type="text2" id="addJob" name="addJob" placeholder="Enter Job">
 		
-			<input type="txt" id="addadd" name="addadd" placeholder="Enter Address" required>
-			<input type="submit" id="bAdd" name="bAdd" value="CONFIRM" class=button> {% csrf_token %} </form>
+  <input type="tel" id="cnumber" name="cnumber" placeholder="Enter Contact Number">
+		
+			<input type="txt" id="addadd" name="addadd" placeholder="Enter Address">
+			
+				
+			<a href="#beneficiary"  onclick="myFunction()""><b><p>SAP APPLICATION</p><b></a>
+	
+	<div id="myDiv2" class="header">	
+	
+	<select id="btranche" name="btranche" onchange="random_function()">
+		        <option value="0">Select Trance</option>
+  			<option value="1">1st Tranche</option>
+  			<option value="2">2nd Tranche</option>
+  			<option value="3">3rd Tranche</option>
+			</select>		
+			
+			<input type="text4" id="bincome" name="bincome" placeholder="Monthly Income">
+			
+			<select id="bcategory" name="bcategory">
+		        <option value="0">Select Existing Beneficiary</option>
+  			<option value="4ps Beneficiary">4ps Beneficiary</option>
+  			<option value="UCT Beneficiary">UCT Beneficiary</option>
+  			<option value="Indigenous Group">Indigenous Group</option>
+  			<option value="Solo Parent">Solo Parent</option>
+  			<option value="Senior Citize">Senior Citizen</option>
+  			<option value="None">None</option>
+  			</select>	          
+		     
+		
+			
+			 
+		        <select id="bmode" name="bmode">
+		        <option value="0">Mode of Payment</option>
+		         {% for sdistribution in sdistribution %}
+			<option value="{{ sdistribution.dmode }}">{{ sdistribution.dmode }}</option>
+			{% endfor %}
+			</select>
+			<select id="btype" name="btype">
+		        <option value="0">Type</option>
+		            {% for sdistribution in sdistribution %}
+			<option value="{{ sdistribution.dtype }}">{{ sdistribution.dtype }}</option>
+			{% endfor %}
+			</select>
+			<select id="blocation" name="blocation">
+			
+		        <option value="0">Location</option>
+		        {% for sdistribution in sdistribution %}
+			<option value="{{ sdistribution.dlocation }}">{{ sdistribution.dlocation }}</option>
+			{% endfor %}
+			</select>
+		
+			
+	
+       		 <select id="bclass" name="bclass" onchange="cclass();">
+		        <option value="">Select Class</option>
+  			<option value="4,000">Low-income Class</option>
+  			<option value="1,000">Medium-income Class</option>
+  			<option value="0">High-income Class</option>
+			</select>
+			<input type="text4" id="bamount" name="bamount" placeholder="Amount">
+			 {% csrf_token %}
+			
+			
+		</div>	
+		<input type="submit" id="bAdd" name="bAdd" value="CONFIRM" class=button> {% csrf_token %}
+		
+			
+				</div>
+			
+			<script>
+function cclass()
+{
+	var d=document.getElementById("bclass");
+	var displaytext=d.options[d.selectedIndex].value;
+	document.getElementById("bamount").value=displaytext;
+	
+}
 
-	</div>
+
+function myFunction() {
+  var x = document.getElementById("myDiv2");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+	
 	<table id="id_table" name='tr'>
 		<tr>
 			<th>Last Name</th>
@@ -46,6 +135,8 @@
 			<th>Job</th>
 			<th>Contact Number</th>
 			<th>Address</th>
+			
+		
 			
 		</tr> 
 		{% for bresidents in ibrgy.bresidents_set.all %}
@@ -58,8 +149,55 @@
 			<td>{{ bresidents.rjob.upper }}</td>
 			<td>{{ bresidents.rnumber }}</td>
 			<td>{{ bresidents.radd.upper }}</td>
-		
+	
 		</tr> {% endfor %} </table>
 </body>
 {% endblock %}
 </html>
+
+
+			
+	 <!-- 	      	
+		    <select id="bmode" name="bmode" onchange="mode()">
+           		 <option value="Select">Select Mode of Distribution</option>
+            		 <option value="Bank">Bank</option>
+            		 <option value="Digital Payment">Digital Payment</option>
+            		 <option value="Others">Others</option>
+       		</select>
+       		<input type="text1" id="addMN" name="addMN" placeholder="Enter Middle Name" required>
+       		   
+		        {% for sdistribution in sdistribution %}
+			<option value="{{ sdistribution.dbank }}">{{ sdistribution.dbank }}</option>
+			<option value="{{ sdistribution.ddigi }}">{{ sdistribution.ddigi }}</option>
+			<option value="{{ sdistribution.dplace }}">{{ sdistribution.dplace }}</option>
+			{% endfor %}
+			</select>
+	
+
+       	 	
+	 <script>
+            function random_function()
+            {
+                var a=document.getElementById("bmode").value;
+                if(a==="Bank")
+                {
+                    var arr=["{{ sdistribution.dbank }}"];
+                }
+                else if(a==="Digital Payment")
+                {
+                    var arr=["{{ sdistribution.ddigi }}"];
+                }
+             	else if(a==="Others")
+                {
+                    var arr=["{{ sdistribution.dplace }}"];
+                }
+                var string="";
+             
+                for(i=0;i<arr.length;i++)
+                {
+                    string=string+"<option value="+arr[i]+">"+arr[i]+"</option>";
+                }
+                document.getElementById("bplace").innerHTML=string;
+            }
+        </script>
+ -->  

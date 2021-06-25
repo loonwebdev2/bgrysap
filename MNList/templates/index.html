@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block body %}
+<form class="form-inline"  action="create" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+  	 <label for="Municipality">Municipality</label>
+        <input type="text" name="Municipality" class="form-control" style="width:30%;" required="required"/>
+        <label for="Brgy">Brgy</label>
+        <input type="text" name="Brgy" class="form-control" style="width:30%;" required="required"/>
+        <label for="BrgyID">BrgyID</label>
+        <input type="text" name="BrgyID" class="form-control" style="width:30%;" required="required"/>
+        <button type="submit" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-plus"></span> ADD</button>
+    </div>
+</form>
+<br />
+<table class="table table-bordered">
+    <thead class="alert-warning">
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ibrgy in ibrgys %}
+        <tr>
+            <td>{{ ibrgy.mncplty }}</td>
+            <td>{{ ibrgy.bname }}</td>
+            <td>{{ ibrgy.bID }}</td>
+            <td><center><a class="btn btn-sm btn-warning" href="edit/{{ ibrgy.id }}"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a class="btn btn-sm btn-danger" href="delete/{{ ibrgy.id }}"><span class="glyphicon glyphicon-trash"></span> Delete</a></center></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

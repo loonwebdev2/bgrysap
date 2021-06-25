@@ -16,7 +16,7 @@
 		<h1>BARANGAY SAP MONITORING SYSTEM</h1>
 	<br>
 	
-		<form method="POST" action="/MNList/new_residents">
+		<form method="POST" action="/new_residents">
 		      <input type="txt" id="BrgyID" name="BrgyID" placeholder="Enter Barangay ID" required>
 			<input type="txt" id="Brgy" name="Brgy" placeholder="Enter Barangay" required>
 			 <input type="txt" id="Municipality" name="Municipality" placeholder="Enter Municipality" required>
@@ -28,15 +28,16 @@
 			<th>Barangay Code</th>
 			<th>Barangay</th>
 			<th>Municipality</th>
-			
+			<th>Action</th>
 			
 		</tr>
 		<tr> {% for ibrgy in ibrgys %}
 			
-		        <td> <a href=MNList/{{ibrgy.id}}>{{ibrgy.bID}}</a></td>
+		        <td> <a href=/{{ibrgy.id}}>{{ibrgy.bID}}</a></td>
 		        <td>{{ibrgy.bname.upper}}</td>
 			<td>{{ibrgy.mncplty.upper}}</td>
-			
+			<td><center><a class="btn btn-sm btn-warning" href="edit/{{ ibrgy.id }}"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a class="btn btn-sm btn-danger" href="delete/{{ ibrgy.id }}"><span class="glyphicon glyphicon-trash"></span> Delete</a></center></td>
+        </tr>
 		
 		</tr> {% endfor %}
         </table>

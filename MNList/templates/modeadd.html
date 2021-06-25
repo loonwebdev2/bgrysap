@@ -1,0 +1,111 @@
+<html>
+
+<head>
+	<title>BARANGAY SAP MONITORING SYSTEM</title>
+</head>
+
+
+
+<body>
+
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+	<div id="myDIV" class="header">
+		<h1>BARANGAY SAP MONITORING SYSTEM</h1>
+		<h2>SAP DISTRIBUTION</h2>
+		
+		<h3>
+		 Welcome, BRGY. {{ibrgy.bname.upper}} , {{ibrgy.mncplty.upper}} !
+		</h3>
+	<h4>
+		 NAME: {{ibrgy.dlname.upper}},{{ibrgy.dfname.upper}} {{ibrgy.dmname.upper}}.  
+		</h4>
+		<form method="POST" action="{{ ibrgy.id }}/add_beneficiary">		          
+		     
+		        <select id="btranche" name="btranche" onchange="random_function()">
+		        <option value="0">Select Trance</option>
+  			<option value="1">1st Tranche</option>
+  			<option value="2">2nd Tranche</option>
+  			<option value="3">3rd Tranche</option>
+			</select>
+			<input type="date" id="sddate" name="sddate">
+			<select id="input" onchange="random_function()">
+           		<option>Select Mode of Distribution</option>
+            		<option>Bank</option>
+            		<option>Digital Payment</option>
+            		<option>Others</option>
+       		</select>
+          		 <select id="output" onchange="random_function1()">
+          		 </select>
+       	
+		
+			<input type="txt" id="blocation" name="blocation" placeholder="Enter Location" required><br>
+				 {% csrf_token %}
+			<input type="submit" id="bAdd" name="bAdd" value="SUBMIT" class=button> </form>
+				
+			
+			
+			        <script>
+            function random_function()
+            {
+                var a=document.getElementById("input").value;
+                if(a==="Bank")
+                {
+                    var arr=["BDO Unibank INC.","Land Bank of the Philippines","RCBC Bank"];
+                }
+                else if(a==="Digital Payment")
+                {
+                    var arr=["GCash","PayMaya","Starpay"];
+                }
+             	else if(a==="Others")
+                {
+                    var arr=["Barangay","City Hall"];
+                }
+                var string="";
+             
+                for(i=0;i<arr.length;i++)
+                {
+                    string=string+"<option value="+arr[i]+">"+arr[i]+"</option>";
+                }
+                document.getElementById("output").innerHTML=string;
+            }
+        </script>
+</script>
+
+	</div>
+	
+
+
+		<table id="id_table" name='tr'>
+		<tr>
+			<th>Last Name</th>
+			<th>First Name</th>
+			<th>Middle Name</th>
+			<th>Class</th>
+			<th>Amount</th>
+			<th>Tranche</th>
+			<th>Mode</th>
+			<th>Place</th>
+			<th>Location</th
+			
+		</tr> 
+	
+		<tr>{% for ibrgy in ibrgys %}
+			<td>{{ bresidents.rlname.upper }}</td>
+			<td>{{ bresidents.rfname.upper }}</td>
+			<td>{{ bresidents.rmname.upper }}</td>
+			<td>{{ bresidents.sclass.upper }}</td>
+			<td>{{ bresidents.samount.upper }}</td>
+			<td>{{ bresidents.dtranche.upper }}</td>
+			<td>{{ bresidents.dmode.upper }}</td>
+			<td>{{ bresidents.dplace.upper }}</td>
+			<td>{{ bresidents.dlocation.upper }}</td>
+		
+		
+		</tr>{% endfor %}</table>
+</body>
+{% endblock %}
+</html>
