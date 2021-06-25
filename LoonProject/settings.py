@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['brgysap.ph']
 
-
+#loon.pythonanywhere.com
 # Application definition
 
 INSTALLED_APPS = [
@@ -64,9 +64,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-          
-		
-            ],	 
+
+
+            ],
         },
     },
 ]
