@@ -16,7 +16,7 @@ class BResidents(models.Model):
       rjob = models.TextField(default='') 
       rnumber = models.IntegerField(default='')  
       radd = models.TextField(default='')
-      ibrgy = models.ForeignKey(IBrgy, default=None, on_delete=models.CASCADE)
+      ibrgy = models.ManyToManyField(IBrgy, default=None, on_delete=models.CASCADE)
       class meta:
           db = "residents"	
    	
@@ -27,7 +27,7 @@ class SBeneficiary(models.Model):
       scategory = models.TextField(default='')
       sclass = models.TextField(default='')
       samount = models.TextField(default='')
-      bresidents = models.ForeignKey(BResidents, default=None, on_delete=models.CASCADE)  
+      bresidents = models.ManyToManyField(BResidents, default=None, on_delete=models.CASCADE)  
       class meta:
           db = "beneficiary"	 
           
