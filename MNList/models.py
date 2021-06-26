@@ -16,7 +16,7 @@ class BResidents(models.Model):
       rjob = models.TextField(default='') 
       rnumber = models.IntegerField(default='')  
       radd = models.TextField(default='')
-      ibrgy = models.ManyToManyField(IBrgy, default=None, on_delete=models.CASCADE)
+      ibrgy = models.ForeignKey(IBrgy, default=None, on_delete=models.CASCADE)
       class meta:
           db = "residents"	
    	
