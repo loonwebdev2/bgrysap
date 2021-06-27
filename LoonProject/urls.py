@@ -23,13 +23,13 @@ urlpatterns = [
     url(r'^(\d+)/add_info$', views.add_info, name='add_info'),
        
 
-   
-    
-    #url ng 3rd page 
-    url(r'^(\d+)/beneficiary$', views.view_beneficiary, name='view_beneficiary'),
+        
+    #url ng 3rd page    
+    url(r'^(\d+)/statusb$', views.view_statuss, name='view_statuss'),
     #url ng data 3rd page      
-    url(r'^(\d+)/add_beneficiary$', views.add_beneficiary, name='add_beneficiary'),
-    
+    url(r'^(\d+)/statusb/add_status$', views.add_statuss, name='add_statutss'),
+  
+
     #url ng 4th page 		 
     url(r'^distribution$', views.view_distribution, name='view_distribution'),
     url(r'^add_distribution$', views.add_distribution, name='add_distribution'),
@@ -48,14 +48,19 @@ urlpatterns = [
     url(r'^remove/(?P<id>\d+)$', views.remove, name='remove'),
     #url(r'^status$', views.s_status, name='s_status'),
     url(r'^about$', views.s_about, name='s_about'),
-
+]
   #url ng 5th page 
-    url(r'^status$', views.view_status, name='view_status'),
+ #   url(r'^status$', views.view_status, name='view_status'),
     #url ng data 5th page      
-    url(r'^add_status$', views.add_status, name='add_status'),
+  #  url(r'^add_status$', views.add_status, name='add_status'),
+    
+    
+    #url ng 3rd page 
+    #url(r'^(\d+)/beneficiary$', views.view_beneficiary, name='view_beneficiary'),
+    #url ng data 3rd page      
+    #url(r'^(\d+)/add_beneficiary$', views.add_beneficiary, name='add_beneficiary'),
     
 
-]
        
     #url(r'^s_info$', views.s_info, name='s_info'),
     #url(r'^s_distribution$', views.s_distribution, name='s_distribution'),

@@ -17,10 +17,9 @@
 		<h1>BARANGAY SAP MONITORING SYSTEM</h1>
 		<h2>SAP STATUS</h2>
 	<h4>
-		 
-		 NAME: {{ibrgy.dlname.upper}},{{ibrgy.dfname.upper}} {{ibrgy.dmname.upper}}.  
+ 		
 		</h4>
-		<form method="POST" action="/add_status">
+		<form method="POST" action="/{{ibrgy.id}}/statusb/add_status">
 			<select id="sstatus" name="sstatus">	
 		        <option value="0">Select Status</option>
   			<option value="Claimed">Claimed</option>
@@ -50,9 +49,9 @@
 			<td>{{ statusdb.dperson.upper }}</td>
 			<td>{{ statusdb.dremarks.upper }}</td>
 	 
-  			  {% endfor %}
+  			  
 		
-		</tr> </table>
+		</tr>{% endfor %} </table>
 	
 </body>
 {% endblock %}
