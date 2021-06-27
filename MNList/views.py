@@ -1,7 +1,7 @@
 
 #from django.http import HttpResponse    
 from django.shortcuts import redirect, render
-from MNList.models import BResidents, IBrgy, SBeneficiary, SDistributions, StatusDB
+from MNList.models import BResidents, IBrgy, SBeneficiary, SDistributions, Statusdbs
 #import git
 from django.views.decorators.csrf import csrf_exempt
 
@@ -44,23 +44,25 @@ def add_info(request, ibrgy_id):
    #sbeneficiary.save()
    
    
-   return redirect(f'/{ibrgy_.id}/')     
+   return redirect(f'/{ibrgy_.id}/beneficiary')     
 
 
 #3rd page     
 def view_beneficiary(request, ibrgy_id): 
-   sdistributions = SDistributions.objects.all()  
+   #bresidents = BResidents.objects.all() 
+
    ibrgy_ = IBrgy.objects.get(id=ibrgy_id)
-   return render(request, 'SBeneficiary.html', {'ibrgy': ibrgy_,'sdistribution' : sdistributions}) 
+   return render(request, 'SBeneficiary.html', {'ibrgy': ibrgy_,'bresidents' : bresidents}) 
    
    
    
 #data ng 3rd page  
 def add_beneficiary(request, ibrgy_id):    
-   ibrgy_ = IBrgy.objects.get(id=ibrgy_id)    
-   SBeneficiary.objects.create(sincome=request.POST['bincome'],scategory=request.POST['bcategory'],sclass=request.POST['bclass'],samount=request.POST['bamount'])
+   #ibrgy_ = IBrgy.objects.get(id=ibrgy_id)    
+   #bresident_ = BResidents.objects.get(id=bresident_id)
+   SBeneficiary.objects.create(sincome=request.POST['bincome'],scategory=request.POST['bcategory'],sclass=request.POST['bclass'],samount=request.POST['bamount'],ibrgy=ibrgy_)
  
-   return redirect(f'/{ibrgy_.id}/distribution')  
+   return redirect(f'/{ibrgy_.id}/beneficiary')  
 
    
  #4th page     
@@ -71,7 +73,6 @@ def view_distribution(request):
    #return render(request, 'SDistribution.html', {'ibrgy': ibrgy_ ,'sdistribution' : sdistributions})     
     
 
-   
 def add_distribution(request):   
    sdistributions = SDistributions(dmode=request.POST['bmode'],dtype=request.POST['btype'],dlocation=request.POST['blocation'])
    sdistributions.save()
@@ -79,16 +80,25 @@ def add_distribution(request):
    return redirect('/distribution')
       
 
-def s_status(request):     
-   return render(request, 'StatusDB.html') 
-   
 def s_about(request):     
    return render(request, 'about.html') 
-#def create(request):
-#   ibrgy = IBrgy(mncplty=request.POST['Municipality'],bname=request.POST['Brgy'],bID=request.POST['BrgyID'])
-#   ibrgy.save()
-#   return redirect('/')
  
+ #5th page     
+def view_status(request): 
+   statusdbs = Statusdbs.objects.all()
+   return render(request, 'StatusDB.html', {'statusdb' : statusdbs})  
+
+
+#data ng 5th page  
+def add_status(request):   
+   statusdbs = Statusdbs(ddate=request.POST['sdate'],dstatus=request.POST['sstatus'],dperson=request.POST['sperson'],dremarks=request.POST['sremarks'])
+   statusdbs.save()   
+   return redirect(f'/status')
+   
+   
+   
+   
+ #CRUD
 def edit(request, id):
    ibrgys = IBrgy.objects.get(id=id)
    context = {'ibrgys': ibrgys}
@@ -164,32 +174,7 @@ def dtmanipulation(request):
     for x in qs:
         res += x.bname + x.bID +'<br>'
 
-
-
-
-
-#5th page     
-def view_status(request): 
-   ibrgy = IBrgy.objects.get(id=id)
-   statusdbs = StatusDB.objects.all()
-   return render(request, 'StatusDB.html', {'ibrgys' : ibrgys}, {'statusdb' : statusdbs})  
-
-
-#data ng 5th page  
-def add_status(request):   
-   statusdbs = StatusDB(ddate=request.POST['sdate'],dstatus=request.POST['sstatus'],dperson=request.POST['sperson'],dremarks=request.POST['sremarks'])
-   statusdbs.save()
-   
-   return redirect(f'/status')
          
-   
-
- 
-    
-
-   
-
-           
 '''            
 @csrf_exempt
 def update(request):

@@ -20,11 +20,11 @@
 
 
 		<h4>
-		{% for bresidents in ibrgy.bresidents_set.all %}
+		
 		 NAME: {{ bresidents.rlname.upper }},{{ bresidents.rfname.upper }} {{ bresidents.rmname.upper }}. 
-		{% endfor %}
+	
 		</h4>
-		<form method="POST" action="/{{ ibrgy.id }}/add_beneficiary">
+		<form method="POST" action="/{{ibrgy.id}}/add_beneficiary">
 			<select id="btranche" name="btranche" onchange="random_function()">
 		        <option value="0">Select Trance</option>
   			<option value="1">1st Tranche</option>
@@ -103,7 +103,7 @@ function cclass()
 		
 			
 		</tr> 
-			{% for bresidents in ibrgy.bresidents_set.all %}
+			{% for sbeneficiary in ibrgy.sbeneficiary_set.all %}
 	
 		<tr>
 			

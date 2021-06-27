@@ -34,6 +34,9 @@ urlpatterns = [
     url(r'^distribution$', views.view_distribution, name='view_distribution'),
     url(r'^add_distribution$', views.add_distribution, name='add_distribution'),
     
+    
+    
+ #CRUD   
     #url(r'^create$', views.create, name='create'),
     url(r'^edit/(?P<id>\d+)$', views.edit, name='edit'),
     url(r'^edit/update/(?P<id>\d+)$', views.update, name='update'),
@@ -43,7 +46,7 @@ urlpatterns = [
     
     url(r'^delete/(?P<id>\d+)$', views.delete, name='delete'),
     url(r'^remove/(?P<id>\d+)$', views.remove, name='remove'),
-    url(r'^status$', views.s_status, name='s_status'),
+    #url(r'^status$', views.s_status, name='s_status'),
     url(r'^about$', views.s_about, name='s_about'),
 
   #url ng 5th page 

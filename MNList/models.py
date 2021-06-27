@@ -1,5 +1,5 @@
 from django.db import models
-
+from datetime import date
     
 class IBrgy(models.Model):
       mncplty = models.TextField(default='')  
@@ -27,7 +27,7 @@ class SBeneficiary(models.Model):
       scategory = models.TextField(default='')
       sclass = models.TextField(default='')
       samount = models.TextField(default='')
-      bresidents = models.ForeignKey(BResidents, default=None, on_delete=models.CASCADE)  
+      bresidents = models.ManyToManyField(BResidents, default=None)  
       class meta:
           db = "beneficiary"	 
           
@@ -41,7 +41,7 @@ class SDistributions(models.Model):
       class meta:
           db = "distribution"	
           
-class StatusDB(models.Model):	
+class Statusdbs(models.Model):	
       sdistribution = models.ManyToManyField(SDistributions, default=None)  	
       bresidents = models.ManyToManyField(BResidents, default=None)  
       sbeneficiary = models.ManyToManyField(SBeneficiary, default=None)  
