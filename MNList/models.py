@@ -27,7 +27,11 @@ class SBeneficiary(models.Model):
       scategory = models.TextField(default='')
       sclass = models.TextField(default='')
       samount = models.TextField(default='')
+<<<<<<< HEAD
       bresidents = models.ManyToManyField(BResidents, default=None)  
+=======
+      bresidents = models.ManyToManyField(BResidents, default=None, on_delete=models.CASCADE)  
+>>>>>>> f4a26ec8e13cbef2c1f91ac4998cccd27c66a9be
       class meta:
           db = "beneficiary"	 
           
