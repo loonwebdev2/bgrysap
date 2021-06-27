@@ -26,25 +26,26 @@ def new_ibrgy(request):
 #2nd page     
 def view_ibrgy(request, ibrgy_id):   
    bresident_ = BResidents.objects.all()  
-   bresident_ = BResidents.objects.order_by("rlname")
-  
+   sbeneficiarys = SBeneficiary.objects.all()
+   sdistributions = SDistributions.objects.all()  
    
+   bresident_ = BResidents.objects.order_by("rlname")
    bresident_ = BResidents.objects.filter(rrelation="Head of the Family")
    #bresident_ = BResidents.objects.filter(rfname="RAYMOND")
-   sdistributions = SDistributions.objects.all()  
+ 
    ibrgy_ = IBrgy.objects.get(id=ibrgy_id)
-   return render(request, 'SInfo.html', {'ibrgy': ibrgy_,'sdistribution' : sdistributions,'bresidents' : bresident_}) 
+   return render(request, 'SInfo.html', {'ibrgy': ibrgy_,'sdistribution' : sdistributions,'bresidents' : bresident_,'sbeneficiary':sbeneficiarys}) 
    
 #data ng 2nd page  
 def add_info(request, ibrgy_id):    
    ibrgy_ = IBrgy.objects.get(id=ibrgy_id)    
     
    BResidents.objects.create(rlname=request.POST['addLN'],rfname=request.POST['addFN'],rmname=request.POST['addMN'],rrelation=request.POST['addRelation'],rjob=request.POST['addJob'],rnumber=request.POST['cnumber'],radd=request.POST['addadd'], ibrgy=ibrgy_)
-   #sbeneficiary=SBeneficiary(sincome=request.POST['bincome'],scategory=request.POST['bcategory'],sclass=request.POST['bclass'],samount=request.POST['bamount'])
-   #sbeneficiary.save()
+   sbeneficiary=SBeneficiary(stranche=request.POST['btranche'],sincome=request.POST['bincome'],scategory=request.POST['bcategory'],sclass=request.POST['bclass'],samount=request.POST['bamount'])
+   sbeneficiary.save()
    
    
-   return redirect(f'/{ibrgy_.id}/beneficiary')     
+   return redirect(f'/{ibrgy_.id}/')     
 
 
 #3rd page     

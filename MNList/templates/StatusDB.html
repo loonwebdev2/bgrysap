@@ -17,6 +17,7 @@
 		<h1>BARANGAY SAP MONITORING SYSTEM</h1>
 		<h2>SAP STATUS</h2>
 	<h4>
+		 
 		 NAME: {{ibrgy.dlname.upper}},{{ibrgy.dfname.upper}} {{ibrgy.dmname.upper}}.  
 		</h4>
 		<form method="POST" action="/add_status">
@@ -45,7 +46,7 @@
 	
 		<tr>{% for statusdb in statusdb %}
 			<td>{{ statusdb.dstatus.upper }}</td>
-			<td>{{ statusdb.ddate.upper }}</td>
+			<td>{{ statusdb.ddate }}</td>
 			<td>{{ statusdb.dperson.upper }}</td>
 			<td>{{ statusdb.dremarks.upper }}</td>
 	 
